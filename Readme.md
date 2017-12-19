@@ -49,60 +49,79 @@ Here is a step by step description of how the example dataset file included with
 import pandas
 from biopyramid.models import bpdataset
 
+
 # Read sample table
-samples = pandas.read_csv("phenotype_information.txt", sep="\t", index_col=0)
+samples = pandas.read_csv("samples.txt", sep="\t", index_col=0)
 
 # We can define which columns of the sample table should be "selectable" within BioPyramid.
 # Selectable columns can be used to group samples in a plot, for example, while the other columns are ignored.
-sampleGroupsDisplayed = ["Cell_pheno", "Donor"]
+sampleGroupsDisplayed = ["celltype", "cell_lineage", "tissue"]
 
 # For each sample group (=column of sample table), we can choose how the items should be ordered
-sampleGroupOrdering = {'Cell_pheno':['E3', 'E4', 'E4-Late', 'E5-Early', 'E5', 'E6', 'E7'],
-                       'Donor':sorted(set(samples['Donor']))}
-
-# Also we can choose colours for each sample group item if we choose to
-sampleGroupColours = {'Cell_pheno':
-                            {'E3':"#cbc9e2", 
-                             'E4':"#bae4b3", 
-                             'E4-Late':"#74c476", 
-                             'E5-Early':"#fcddab", 
-                             'E5':"#ef9708", 
-                             'E6':"#9cded6", 
-                             'E7':"#f0aaab"}
+sampleGroupOrdering = {'cell_lineage': ['Multi Potential Progenitor', 'Restricted Potential Progenitor', 
+                                        'Erythrocyte Lineage', 'Megakaryocyte Lineage', 'Mast Cell Lineage', 
+                                        'Basophil Lineage', 'Eosinophil Lineage', 'Neutrophil Lineage', 
+                                        'Macrophage Lineage', 'Dendritic Cell Lineage', 'B Cell Lineage', 
+                                        'T Cell Lineage', 'NK Cell Lineage'], 
+                       'celltype': ['LTHSC', 'STHSC', 'MPP', 'CMP', 'PreGM1', 'PreGM2', 'GMP', 'FcgRBP', 
+                                    'CD9Hi', 'BEMP', 'CLP', 'PreCFUE', 'MEP', 'CFUE', 'EryBlPB', 'EryBlPO', 
+                                    'Retic', 'Meg8N', 'Meg16N', 'Meg32N', 'Mast', 'Baso', 'EoP', 'Eo', 'NeutLN', 
+                                    'NeutPt', 'MonoPB', 'MonoLN', 'Mac', 'CDP', 'cDC1', 'cDC2', 'MigDC', 'ProB', 
+                                    'PreB', 'ImmB', 'B1', 'B2', 'MatB', 'CD4TThy1lo', 'TN1', 'TN2', 'TN3', 'TN4', 
+                                    'DblPosT', 'NveCD4T', 'NveCD8T', 'EffCD4T', 'EffCD8T', 'CD4TLN', 'CD8TLN', 
+                                    'RegT', 'MemCD8T', 'NK']
                       }
 
-# Read expression matrix - these are cpm values (not logged)
-cpm = pandas.read_csv("cpm.1.0.txt", sep="\t", index_col=0)
+# Also we can choose colours for each sample group item if we choose to
+sampleGroupColours = {'cell_lineage': 
+                          {'Multi Potential Progenitor': 'rgb(190,190,190)', 
+                           'Erythrocyte Lineage': 'rgb(139,0,0)', 
+                           'NK Cell Lineage': 'rgb(34,139,34)', 
+                           'Mast Cell Lineage': 'rgb(255,20,147)', 
+                           'Eosinophil Lineage': 'rgb(255,140,105)', 
+                           'Macrophage Lineage': 'rgb(171,130,255)', 
+                           'Dendritic Cell Lineage': 'rgb(30,144,255)', 
+                           'Basophil Lineage': 'rgb(205,55,0)', 
+                           'T Cell Lineage': 'rgb(0,255,0)', 
+                           'Neutrophil Lineage': 'rgb(104,34,139)', 
+                           'Megakaryocyte Lineage': 'rgb(238,180,34)', 
+                           'B Cell Lineage': 'rgb(0,0,255)', 
+                           'Restricted Potential Progenitor': 'rgb(127,127,127)'}
+                     }
+
+
+# Read expression matrix - quantile normalised, mapped to gene ids, then aggregated for multiple probes
+expression = pandas.read_csv("normalised_expression.txt", sep="\t", index_col=0)
 
 # Check that all columns of expression matrix are found in the sample table
-assert set(cpm.columns).issubset(set(samples.index))
+assert set(expression.columns).issubset(set(samples.index))
 
 # Create coordinates of PCA, used to plot this quickly
 from sklearn.decomposition import PCA
 import numpy
-fit = PCA(n_components=2).fit_transform(numpy.log2(cpm+1).transpose()) # PCA function works on rows so transpose
-pca = pandas.DataFrame(fit, index=cpm.columns, columns=['x','y'])
+fit = PCA(n_components=2).fit_transform(expression.transpose()) # PCA function works on rows so transpose
+pca = pandas.DataFrame(fit, index=expression.columns, columns=['x','y'])
 
 # Dataset metadata
-attributes = {'name': 'lanner', 
-              'fullname': 'Lanner',
-              'description': 'Single-Cell RNA-Seq Reveals Lineage and X Chromosome Dynamics in Human Preimplantation Embryos',
-              'expression_data_keys': ['cpm'],
-              'pubmed_id': '27062923', 
-              'species': 'HomoSapiens', 
-              'version': '1.0'}
+attributes = {'name': 'haemopedia',
+              'fullname': 'Haemopedia',
+              'description': 'Microarray gene expression profiles from a comprehensive range of wildtype murine blood cells, all generated by Hilton Lab (Walter and Eliza Hall Institute) over a number of years.', 
+              'expression_data_keys': ['normalised'],
+              'pubmed_id': '27499199', 
+              'species': 'MusMusculus', 
+              'version': '2.7'}
 
 # Finally ready to create the file
 bpdataset.createDatasetFile(".", 
                             attributes=attributes,
                             samples=samples,
-                            expressions=[cpm],
+                            expressions=[expression],
                             sampleGroupsDisplayed=sampleGroupsDisplayed,
                             sampleGroupOrdering=sampleGroupOrdering,
                             sampleGroupColours=sampleGroupColours,
                             pca=pca,
                             )
-# This would create "lanner.1.0.h5" file in the current directory.
+# This would create "haemopedia.2.7.h5" file in the current directory.
 ```
 
 
