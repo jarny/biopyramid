@@ -1,0 +1,13 @@
+*.pid
+*.bak
+*.sav
+*.save
+.not
+\#*
+.\#*
+*.pyc
+*~
+*.egg-info/
+__pycache__/
+.DS_Store
+

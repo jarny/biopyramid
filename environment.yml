@@ -1,0 +1,25 @@
+name: biopyramid
+channels:
+- defaults
+dependencies:
+- hdf5
+- mako
+- numpy
+- pandas
+- pastedeploy
+- pip
+- pyramid
+- pytables
+- repoze.lru
+- setuptools
+- sqlite
+- waitress
+- pip:
+  - beaker
+  - genedataset
+  - pygments
+  - pyramid-beaker
+  - pyramid-debugtoolbar
+  - pyramid-mako
+  - tables
+
