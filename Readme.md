@@ -28,12 +28,13 @@ pserve development.ini
 
 If successful, you will be able to go to the URL shown by the pserve command on your browser.
 
-Note that this repo contains a large (650+Mb) example dataset.
+Note that this repo contains a 33Mb example dataset.
 
 ## How to use it
 BioPyramid comes with an example dataset, so you should be able to play with it to test out its main features. Then the next step may be to create your own dataset file and upload it - read the section on dataset creation below for more details on how to do this.
 
 After that, you can modify the code to customise it to your own application. For those not familiar with the code structure of python pyramid, here is a schematic of the components which make up biopyramid and some description of each part to get started.
+
 ![Schematic](/biopyramid/static/images/Schematic.png)
 
 - biopyramid/models/ contains data models which should exist independently of the pyramid application. This is also a suitable place to create extensions of the existing classes such as genedataset, and an example is provided by bpdataset.py, which has BPDataset class that inherits from genedataset.Dataset class. 
@@ -42,9 +43,9 @@ After that, you can modify the code to customise it to your own application. For
 - biopyramid/views/ contains controllers whose functions are read by pyramid at start-up. The functions with @view_config decorators should map to URLs as specified in biopyramid/__init__.py. The grouping of the functions into individual scripts is for convenience.
 
 ## How to add a dataset
-To add a dataset to BioPyramid, first create the HDF file required for instantiating the bpdataset.BPDataset class. See below for more detail including an example. Then simply place this file inside data/datasets/ directory. The application will look for all files in this directory with suffix "h5" and read them as available datasets.
+To add a dataset to BioPyramid, first create the HDF file required for instantiating the bpdataset.BPDataset class. Then simply place this file inside data/datasets/ directory. The application will look for all files in this directory with suffix "h5" and read them as available datasets.
 
-Here is a step by step description of how the example dataset file included with BioPyramid, "lanner.1.0.h5", was created, so that it can be used as a template for additional dataset creation.
+Here is a step by step description of how the example dataset file included with BioPyramid, "haemopedia.2.7.h5", was created, so that it can be used as a template for additional dataset creation.
 ```python
 import pandas
 from biopyramid.models import bpdataset
