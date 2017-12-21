@@ -1,7 +1,5 @@
 from pyramid.config import Configurator
 from pyramid_beaker import session_factory_from_settings
-#from views.views import RootFactory
-
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.

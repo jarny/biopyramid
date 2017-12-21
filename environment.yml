@@ -12,11 +12,10 @@ dependencies:
 - pytables
 - repoze.lru
 - setuptools
-- sqlite
 - waitress
 - pip:
   - beaker
-  - genedataset
+  - genedataset>=1.0.0
   - pygments
   - pyramid-beaker
   - pyramid-debugtoolbar

@@ -12,18 +12,20 @@ BioPyramid uses minimal set of very transparent code with clear documentation th
 
 ## How to install it
 1. Clone this repo.
-2. Install conda
-3. Create the required environment by running:
-```bash
-conda env create -f environment.yml
-```
-4. Install BioPyramid by running (from within the repository directory):
+2. Install BioPyramid by running (from within the repository directory):
 ```bash
 python setup.py develop
 ```
-5. Start the pyramid server:
+3. Start the pyramid server:
 ```bash
 pserve development.ini
+```
+
+If you're using conda and would like to install BioPyramid in a separate environment, insert these steps between 1 and 2:
+- Install conda
+- Create the required environment by running:
+```bash
+conda env create -f environment.yml
 ```
 
 If successful, you will be able to go to the URL shown by the pserve command on your browser.
