@@ -28,7 +28,7 @@ If you're using conda and would like to install BioPyramid in a separate environ
 conda env create -f environment.yml
 ```
 
-If successful, you will be able to go to the URL shown by the pserve command on your browser.
+If successful, you will be able to go to the URL shown by the pserve command on your browser (default is http://localhost:6545).
 
 Note that this repo contains a 33Mb example dataset.
 

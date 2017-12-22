@@ -1,6 +1,13 @@
 """
 This module extends genedataset.dataset by providing extra data and functionality. These extra data
 can be specific to the BioPyramid application, such as colours or ordering used for sample groups.
+
+Note on mutex:
+At one stage, the HDF file created by the dataset had issues when multiple users were trying to access
+the same dataset at exactly the same moment (it crashed the server!), even though the file was read only. 
+Hence we came up with a way to "lock" the file briefly while one user accesses it through this 
+mutual exclusion (mutex) system. Even though there have been updates to HDF packages since these issues 
+(late 2016), we've kept the code here as a safeguard.
 """
 import pandas
 import genedataset.dataset
