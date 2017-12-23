@@ -11,11 +11,12 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
 requires = [
     'pandas',
     'tables',
+    'pastedeploy',
     'pyramid',
     'pyramid_mako',
     'pyramid_beaker',
     'pyramid_debugtoolbar',
-    'genedataset>=1.0.0',
+    'genedataset>=1.0.0a',
     'waitress',
     ]
 
