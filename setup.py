@@ -21,7 +21,7 @@ requires = [
     ]
 
 setup(name='biopyramid',
-      version='0.1',
+      version='0.0.1a',
       description='biopyramid',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
