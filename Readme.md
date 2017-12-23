@@ -72,7 +72,7 @@ sampleGroupOrdering = {'cell_lineage': ['Multi Potential Progenitor', 'Restricte
                                     'RegT', 'MemCD8T', 'NK']
                       }
 
-# Also we can choose colours for each sample group item if we choose to
+# Also we can choose colours for each sample group item if we choose to. The colours can be rgb or hex values.
 sampleGroupColours = {'cell_lineage': 
                           {'Multi Potential Progenitor': 'rgb(190,190,190)', 
                            'Erythrocyte Lineage': 'rgb(139,0,0)', 
@@ -90,7 +90,7 @@ sampleGroupColours = {'cell_lineage':
                      }
 
 
-# Read expression matrix - quantile normalised, mapped to gene ids, then aggregated for multiple probes
+# Read expression matrix - this ia a quantile normalised matrix which have been mapped to gene ids, then aggregated for multiple probes
 expression = pandas.read_csv("normalised_expression.txt", sep="\t", index_col=0)
 
 # Check that all columns of expression matrix are found in the sample table

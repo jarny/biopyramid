@@ -24,6 +24,7 @@ def showPage(request):
 	sampleIds = dataset.sampleIds()
 	sampleGroups = dataset.sampleGroups(returnType="display")
 	sampleGroupItems = dict([(item, dataset.sampleGroupItems(sampleGroup=item)) for item in sampleGroups])
+	sampleGroupColours = dict([(item, dataset.sampleGroupColours(sampleGroup=item)) for item in sampleGroups])	
 	sampleIdsAsGroupItems = dict([(group, dataset.sampleGroupItems(sampleGroup=group, duplicates=True)) for group in sampleGroups])
 
 	# Fetch expression values of selected gene
@@ -41,4 +42,5 @@ def showPage(request):
 			'sampleIds':sampleIds,
 			'sampleGroups':sampleGroups, 
 			'sampleGroupItems':sampleGroupItems, 
+			'sampleGroupColours':sampleGroupColours, 
 			'sampleIdsAsGroupItems':sampleIdsAsGroupItems}

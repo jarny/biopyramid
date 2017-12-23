@@ -1,14 +1,15 @@
 <%
 '''
 Required inputs for this template, with examples:
-datasetNames: list of available dataset names, ['lanner',...]
-selectedDatasetName: selected name from list of available dataset names, 'lanner'
-coords: PCA coordinates as list of lists in Nx2 shape, [[2.1, 0.2, ...], [3.3, 0.0, ...]]
-sampleIds: list of sample ids in the same matching order as coords[0], ['sample1','sample2',...]
-sampleGroups: list of sample groups in the dataset, ['celltype', 'cell_lineage']
-sampleGroupItems: dict of sample group items keyed on sample group, {'celltype':['B','T',...], 'cell_lineage':['B-Cell Lineage',...]}
-sampleIdsAsGroupItems: dict of sample group items in the same matching order as sampleIds, keyed on sample group,
-	{'celltype':['B','B','T','B',...], 'cell_lineage':['B-Cell Lineage','B-Cell Lineage',...]}
+	datasetNames: list of available dataset names, ['lanner',...]
+	selectedDatasetName: selected name from list of available dataset names, 'lanner'
+	coords: PCA coordinates as list of lists in Nx2 shape, [[2.1, 0.2, ...], [3.3, 0.0, ...]]
+	sampleIds: list of sample ids in the same matching order as coords[0], ['sample1','sample2',...]
+	sampleGroups: list of sample groups in the dataset, ['celltype', 'cell_lineage']
+	sampleGroupItems: dict of sample group items keyed on sample group, {'celltype':['B','T',...], 'cell_lineage':['B-Cell Lineage',...]}
+	sampleGroupColours: dict of sample group colours keyed on sample group, {'celltype':['#cccccc',...], 'cell_lineage':['#f2f2f2',...]}
+	sampleIdsAsGroupItems: dict of sample group items in the same matching order as sampleIds, keyed on sample group,
+		{'celltype':['B','B','T','B',...], 'cell_lineage':['B-Cell Lineage','B-Cell Lineage',...]}
 '''
 import json
 %>
@@ -35,6 +36,7 @@ import json
 		sampleIds: ${json.dumps(sampleIds) |n},
 		sampleGroups: ${json.dumps(sampleGroups) |n},
 		sampleGroupItems: ${json.dumps(sampleGroupItems) |n},
+		sampleGroupColours: ${json.dumps(sampleGroupColours) |n},
 		sampleIdsAsGroupItems: ${json.dumps(sampleIdsAsGroupItems) |n}
 	};
 	
@@ -96,8 +98,11 @@ import json
 						y: self.data.coords[1].filter(function(item,index) { return self.data.sampleIdsAsGroupItems[selectedSampleGroup][index]==groupItem }),
 						text: self.data.sampleIdsInThisGroupItem,
 						name: groupItem,
+						marker: {},
 						mode: "markers",
 					};
+				if (selectedSampleGroup in self.data.sampleGroupColours && groupItem in self.data.sampleGroupColours[selectedSampleGroup])
+					trace.marker.color = self.data.sampleGroupColours[selectedSampleGroup][groupItem];
 				traces.push(trace);
 				}
 				Plotly.newPlot("mainPlotDiv", traces, { title: "PCA" });

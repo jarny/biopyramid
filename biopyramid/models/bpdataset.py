@@ -201,10 +201,11 @@ class BPDataset(genedataset.dataset.Dataset):
 			
 		"""
 		series = self._sampleGroupColours
+
 		if sampleGroup:
 			return series[sampleGroup] if sampleGroup in series else {}  # series[sampleGroup] is already a dict
 		else:
-			return series.to_dict()
+			return series.to_dict()		
 		
 	def sampleGroupOrdering(self, sampleGroup=None):
 		"""Return list of ordered sample group items given sampleGroup, eg: ['LSK','MPP', ...]
