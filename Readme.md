@@ -12,18 +12,19 @@ BioPyramid uses minimal set of very transparent code with clear documentation th
 
 ## How to install it
 
-1. Clone this repo.
-2. Install BioPyramid and dependent packages by running (from within the repository directory):
+1. Install python if you don't already have it. [Conda](https://www.anaconda.com/download) is the recommended way of installing python. BioPython is designed for python3, tested on python 3.6.3. It does work on python2, but you won't be able to use the example dataset provided with python2, as that was created using python3 (you should delete the .h5 file in data/datasets and create your own).
+2. Clone this repo.
+3. Install BioPyramid and dependent packages by running (from within the repository directory):
 ```bash
 pip install -e .
 ```
-3. Start the pyramid server:
+4. Start the pyramid server:
 ```bash
 pserve development.ini
 ```
 
-If you're using conda or virtualenv to install BioPyramid in a separate environment, do that before step 2.
-environment.yml has been provided so that conda can be used to install the packages instead of pip, if desired ("conda env create -f environment.yml" instead of step 2).
+If you're using conda or virtualenv to install BioPyramid in a separate environment, do that before step 3.
+environment.yml has been provided so that conda can be used to install the packages instead of pip, if desired ("conda env create -f environment.yml" instead of step 3).
 
 If successful, you will be able to go to the URL shown by the pserve command on your browser (default is http://localhost:6545).
 
