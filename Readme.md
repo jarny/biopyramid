@@ -1,6 +1,19 @@
 BioPyramid
 ======
-**BioPyramid** is a python and javascript based framework for developing an online genomics application. It can be used as a starting scaffold or a template. BioPyramid contains a number of components designed to reduce the time and effort in building such an application from scratch, including gene annotation, dataset models and visualisation tools.
+**BioPyramid** is a python and javascript based framework for developing an online gene expression data portal. It can be used as a starting scaffold or a template. BioPyramid contains a number of components designed to reduce the time and effort in building such an application from scratch, including gene annotation, dataset models and visualisation tools.
+
+Another way to think about BioPyramid is as a scalable, pythonic version of [Shiny](https://shiny.rstudio.com/). Shiny is great for creating quick prototypes, but many of the functions often used in database web servers are beyond its scope, such as authentication and user management. BioPyramid is based on python [pyramid](http://trypyramid.com) - an enterprise level software for developing complex web applications.
+
+## Example Use Cases
+BioPyramid is targeted at bioinformaticians or systems developers who want full control of all elements of an application, or to move beyond Shiny prototypes to more fully scalable data portals. The following may be typical scenarios under which BioPyramid can provide a starting point:
+
+- Development of a medium to large scale online data portal, which makes a set of related datasets and custom analysis functions available. Examples of such portals include [haemosphere.org](http://haemosphere.org), [stemformatics.org](http://stemformatics.org), and [R2 Genomics](http://r2.amc.nl/). All these portals offer many features and functions beyond the scope of a Shiny server.
+- Hosting datasets where access functions may be not analysis driven, such as downloading files or looking up gene expression profiles, or updating data. These functions are more easily implemented in python than in R.
+- Hosting private datasets which require access by collaborators, but too sensitive to upload to existing online tools for analysis.
+- To make available a set of analysis tools written in python by also providing a server with applicable datasets included.
+- To create a data portal with heavily javascript driven visualisations, where full control of every element of the html pages is required.
+
+An example data portal which uses the BioPyramid as its base is [haemosphere.org](http://haemosphere.org), which is a fully featured web application with many components, and illustrates how BioPyramid can be scaled up to a much larger project from its prototype stage.
 
 ## Key Components
 BioPyramid contains the following set of ready-made modules:
