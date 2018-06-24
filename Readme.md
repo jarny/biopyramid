@@ -5,7 +5,7 @@ BioPyramid
 Another way to think about BioPyramid is as a scalable, pythonic version of [Shiny](https://shiny.rstudio.com/). Shiny is great for creating quick prototypes, but many of the functions often used in database web servers are beyond its scope, such as authentication and user management. BioPyramid is based on python [pyramid](http://trypyramid.com) - an enterprise level software for developing complex web applications.
 
 ## Citing BioPyramid
-Liam Stephenson, Yoshua Wakeham, Nick Seidenman, Jarny Choi; Building online genomics applications using BioPyramid, Bioinformatics, , bty207, https://doi.org/10.1093/bioinformatics/bty207
+Liam Stephenson, Yoshua Wakeham, Nick Seidenman, Jarny Choi; Building online genomics applications using BioPyramid, Bioinformatics, https://doi.org/10.1093/bioinformatics/bty207
 
 ## Example Use Cases
 BioPyramid is targeted at bioinformaticians or systems developers who want full control of all elements of an application, or to move beyond Shiny prototypes to more fully scalable data portals. The following may be typical scenarios under which BioPyramid can provide a starting point:
